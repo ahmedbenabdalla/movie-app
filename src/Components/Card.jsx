@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 import Rating from "./Rating";
 
@@ -10,11 +11,14 @@ const Card = (props) => {
         title={props.movie.Title}
         Rating={props.movie.Rating}
       />
-      <img
-        src={props.movie.Image}
-        alt="movie-image"
-        style={{ width: "310px", height: "350px" }}
-      />
+
+      <Link to={`/movie/${props.movie.Title}`}>
+        <img
+          src={props.movie.Image}
+          alt="movie-image"
+          style={{ width: "310px", height: "350px" }}
+        />
+      </Link>
       <h3>{props.movie.Date}</h3>
     </div>
   );

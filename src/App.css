@@ -1,4 +1,5 @@
 .App {
-  text-align: center;
   background-color: red;
+  padding-top: 100px;
+  height: 100%;
 }

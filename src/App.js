@@ -6,6 +6,8 @@ import { useState } from "react";
 import Data from "./Data";
 import Rating from "./Components/Rating";
 import Add from "./Components/Add";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Details from "./Components/Details";
 
 function App() {
   const [data, setdata] = useState(Data);
@@ -47,17 +49,36 @@ function App() {
           Rating={stars}
         ></Rating>
       </div>
-      <List
-        handleStars={handleStars}
-        Data={data.filter(
-          (el) =>
-            el.Title.toLowerCase().includes(researsh.toLowerCase()) &&
-            el.Rating >= stars
-        )}
-      ></List>
-      <div className="fixed">
-        <Add handleClose={handleClose} handleShow={handleShow} show={show} />
-      </div>
+      <BrowserRouter>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => (
+              <List
+                handleStars={handleStars}
+                Data={data.filter(
+                  (el) =>
+                    el.Title.toLowerCase().includes(researsh.toLowerCase()) &&
+                    el.Rating >= stars
+                )}
+              ></List>
+            )}
+          ></Route>
+          <Route
+            exact
+            path="/movie/:Title"
+            render={(props) => <Details movies={data} {...props}></Details>}
+          ></Route>
+          <div className="fixed">
+            <Add
+              handleClose={handleClose}
+              handleShow={handleShow}
+              show={show}
+            />
+          </div>
+        </Switch>
+      </BrowserRouter>
     </div>
   );
 }
